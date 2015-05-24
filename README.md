@@ -6,14 +6,14 @@ filter an array through async callback
 ```javascript
 var filter = require('array-promise-filter');
 var promisify = require('node-promisify');
-var gt = promisify(function (n, m, cb) {
+var gt2 = promisify(function (n, m, cb) {
     process.nextTick(function () {
         var err = n <= m ? new Error('not greater') : null;
-        cb(err, m);
+        cb(err, n << 1);
     });
 });
-filter([1,2,3,4,5,6], gt, 3).then(function (res) {
-    console.log(res);   // [4,5,6]
+filter([1,2,3,4,5,6], gt2, 3).then(function (res) {
+    console.log(res);   // [8,10,12]
 });
 
 ```
