@@ -1,0 +1,32 @@
+{
+  "name": "array-promise-filter",
+  "version": "0.0.1",
+  "description": "filter an array through async callback",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test/*.js | faucet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoubin/array-promise-filter.git"
+  },
+  "keywords": [
+    "array",
+    "filter",
+    "promise"
+  ],
+  "author": "zoubin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoubin/array-promise-filter/issues"
+  },
+  "homepage": "https://github.com/zoubin/array-promise-filter#readme",
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "node-promisify": "^0.1.2",
+    "tape": "^4.0.0"
+  }
+}
