@@ -1,4 +1,4 @@
-
+var arrayify = require('arrayify-slice');
 module.exports = function (values, cb) {
     var args = arrayify(arguments, 2);
     var pending = values.length;
@@ -24,8 +24,4 @@ module.exports = function (values, cb) {
         }
     });
 };
-
-function arrayify(o, from, to) {
-    return Array.prototype.slice.call(o, from, to);
-}
 
