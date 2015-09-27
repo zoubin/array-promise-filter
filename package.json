@@ -1,6 +1,6 @@
 {
   "name": "array-promise-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "filter an array through async callback",
   "main": "index.js",
   "directories": {
