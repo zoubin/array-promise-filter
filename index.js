@@ -1,5 +1,5 @@
 var asyncFilter = require('array-async-filter');
-var $Promise = Promise || require('es6-promise').Promise;
+var $Promise = typeof Promise === 'function' && Promise || require('es6-promise').Promise;
 
 module.exports = function (values, cb) {
   return new $Promise(function (resolve, reject) {
