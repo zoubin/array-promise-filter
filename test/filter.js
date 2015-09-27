@@ -1,16 +1,51 @@
-var test = require('tape');
+var test = require('tap').test;
 var filter = require('..');
-var promisify = require('node-promisify');
 
-test('filter', function (t) {
-    t.plan(1);
-    var gt = promisify(function (n, m, cb) {
-        process.nextTick(function () {
-            var err = n <= m ? new Error('not greater') : null;
-            cb(err, n);
-        });
+test('async callback', function (t) {
+  t.plan(2);
+  function isUpperCase(n, i, arr, next) {
+    process.nextTick(function () {
+      try {
+        next(null, !n.split().some(function (c) {
+          return c >= 'a';
+        }));
+      } catch (e) {
+        next(e);
+      }
     });
-    filter([1,2,3,4,5,6], gt, 3).then(function (res) {
-        t.same(res, [4,5,6]);
+  }
+  filter(['ab', 'CD', 'ef', 'GH'], isUpperCase)
+    .then(function (res) {
+      t.same(res, ['CD', 'GH']);
+    });
+  filter(['ab', 'CD', 1, 'GH'], isUpperCase)
+    .catch(function (err) {
+      t.ok(err instanceof Error);
     });
 });
+
+test('promise callback', function (t) {
+  t.plan(2);
+  function isUpperCase(n) {
+    return new Promise(function (rs, rj) {
+      process.nextTick(function () {
+        try {
+          rs(!n.split().some(function (c) {
+            return c >= 'a';
+          }));
+        } catch (e) {
+          rj(e);
+        }
+      });
+    });
+  }
+  filter(['ab', 'CD', 'ef', 'GH'], isUpperCase)
+    .then(function (res) {
+      t.same(res, ['CD', 'GH']);
+    });
+  filter(['ab', 'CD', 1, 'GH'], isUpperCase)
+    .catch(function (err) {
+      t.ok(err instanceof Error);
+    });
+});
+

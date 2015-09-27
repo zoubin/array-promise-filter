@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tape test/*.js | faucet"
+    "test": "eslint . && tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,11 @@
   },
   "homepage": "https://github.com/zoubin/array-promise-filter#readme",
   "devDependencies": {
-    "faucet": "0.0.1",
-    "node-promisify": "^0.1.2",
-    "tape": "^4.0.0"
+    "eslint": "^1.5.1",
+    "tap": "^1.4.1"
   },
   "dependencies": {
-    "arrayify-slice": "^1.0.0"
+    "array-async-filter": "^2.0.0",
+    "es6-promise": "^3.0.2"
   }
 }
